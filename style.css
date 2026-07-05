@@ -104,3 +104,15 @@ body{
     background:#10a37f;
     color:white;
 }
+#voiceBtn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#voiceBtn:hover{
+    background:#1d4ed8;
+}
