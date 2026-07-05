@@ -121,7 +121,7 @@
         </div>
         
         <div class="whatsapp-container">
-            <a href="https://wa.me..." 
+            <a href="https://wa.me" 
                target="_blank" 
                style="text-decoration: none; display: inline-block; width: 100%;">
                 <button class="whatsapp-btn" type="button">
@@ -155,20 +155,12 @@
             chatBox.scrollTop = chatBox.scrollHeight;
 
             try {
-                // Kiran kofa ta musamman ta hanyar madaidacin tsarin haɗin Google Gemini kyauta
-                const response = await fetch("https://pollinations.ai", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        model: "openai", // Canza uwar gida zuwa tsarin openai backend domin gudun matsalar sabar jiya
-                        messages: [
-                            { role: "system", content: "Kai ne Gwani AI. Abokin taimakon mutane cikin yaren Hausa. Ka amsa tambayoyi a gajarce, cikin sauki da Hausa mai dadi." },
-                            { role: "user", content: messageText }
-                        ]
-                    })
-                });
-
+                // 🛑 GYARA MAFI MUHIMMANCI: An dawo da tsarin GET mai jona tambaya a URL wanda baya gazawa
+                let tsarinSako = "Kai ne Gwani AI. Abokin taimakon mutane cikin yaren Hausa. Ka amsa tambayoyi a gajarce, cikin sauki da Hausa mai dadi. Tambaya: " + messageText;
+                
+                const response = await fetch("https://pollinations.ai" + encodeURIComponent(tsarinSako));
                 let aiReply = await response.text();
+
                 document.getElementById("loading").remove();
 
                 let aiDiv = document.createElement("div");
