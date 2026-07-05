@@ -170,3 +170,15 @@ imageInput.onchange = async () => {
 
     reader.readAsDataURL(file);
 };
+const imageBtn = document.getElementById("imageBtn");
+const imageInput = document.getElementById("imageInput");
+
+imageBtn.addEventListener("click", () => {
+    imageInput.click();
+});imageInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    alert("An zaɓi hoto: " + file.name);
+});
