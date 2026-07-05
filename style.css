@@ -116,3 +116,15 @@ body{
 #voiceBtn:hover{
     background:#1d4ed8;
 }
+#imageBtn{
+    background:#f59e0b;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#imageBtn:hover{
+    background:#d97706;
+}
