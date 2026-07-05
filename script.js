@@ -132,3 +132,41 @@ recognition.onstart = () => {
 recognition.onend = () => {
     voiceBtn.textContent = "🎤";
 };
+const imageBtn = document.getElementById("imageBtn");
+const imageInput = document.getElementById("imageInput");
+
+imageBtn.onclick = () => imageInput.click();
+
+imageInput.onchange = async () => {
+    const file = imageInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+
+        addMessage("📷 An tura hoto", "user");
+
+        const response = await fetch(WORKER_URL,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                image:reader.result,
+                message:"Ka bayyana wannan hoto cikin Hausa."
+            })
+        });
+
+        const data = await response.json();
+
+        addMessage(
+            data.choices?.[0]?.message?.content ||
+            "Ba a samu amsa ba",
+            "ai"
+        );
+
+    };
+
+    reader.readAsDataURL(file);
+};
