@@ -103,9 +103,9 @@ if (SpeechRecognition) {
     recognition.interimResults = false;
 
     voiceBtn.onclick = () => {
-        recognition.start();
-        voiceBtn.textContent = "🎙️...";
-    };
+    alert("An danna microphone");
+    recognition.start();
+};
 
     recognition.onresult = (event) => {
         userInput.value = event.results[0][0].transcript;
