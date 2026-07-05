@@ -108,10 +108,12 @@ if (SpeechRecognition) {
 };
 
     recognition.onresult = (event) => {
-        userInput.value = event.results[0][0].transcript;
-        voiceBtn.textContent = "🎤";
-    };
+    const text = event.results[0][0].transcript;
+    userInput.value = text;
 
+    // Aika saƙon kai tsaye
+    sendMessage();
+};
     recognition.onerror = () => {
         voiceBtn.textContent = "🎤";
         alert("Ba a iya amfani da murya a wannan browser.");
@@ -123,3 +125,10 @@ if (SpeechRecognition) {
 } else {
     voiceBtn.style.display = "none";
 }
+recognition.onstart = () => {
+    voiceBtn.textContent = "🎙️ Ana sauraro...";
+};
+
+recognition.onend = () => {
+    voiceBtn.textContent = "🎤";
+};
