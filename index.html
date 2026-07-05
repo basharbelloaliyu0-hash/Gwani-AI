@@ -5,103 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gwani AI - Abokin Taimakonka</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        .header {
-            background-color: #1b4d3e; 
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .chat-container {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .message {
-            max-width: 75%;
-            padding: 12px 16px;
-            border-radius: 15px;
-            font-size: 16px;
-            line-height: 1.4;
-        }
-        .user-message {
-            background-color: #1b4d3e;
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-            font-weight: 500;
-        }
-        .ai-message {
-            background-color: white;
-            color: #1a1a1a;
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.06);
-            font-weight: 500;
-        }
-        .footer-controls {
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            border-top: 1px solid #ddd;
-            padding: 10px;
-            gap: 10px;
-        }
-        .input-container {
-            display: flex;
-            width: 100%;
-        }
-        .input-container input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 25px;
-            outline: none;
-            font-size: 16px;
-            padding-left: 20px;
-        }
-        .input-container button {
-            background-color: #1b4d3e;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            margin-left: 10px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .whatsapp-container {
-            width: 100%;
-            text-align: center;
-        }
-        .whatsapp-btn {
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+        .header { background-color: #1b4d3e; color: white; padding: 15px; text-align: center; font-size: 22px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .chat-container { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .message { max-width: 75%; padding: 12px 16px; border-radius: 15px; font-size: 16px; line-height: 1.4; }
+        .user-message { background-color: #1b4d3e; color: white; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 500; }
+        .ai-message { background-color: white; color: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 4px 8px rgba(0,0,0,0.06); font-weight: 500; }
+        .footer-controls { display: flex; flex-direction: column; background-color: white; border-top: 1px solid #ddd; padding: 10px; gap: 10px; }
+        .input-container { display: flex; width: 100%; align-items: center; gap: 5px; }
+        .input-container input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 25px; outline: none; font-size: 16px; padding-left: 20px; }
+        .icon-btn { background: #f0f2f1; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .icon-btn:hover { background: #e2e5e4; }
+        .send-btn { background-color: #1b4d3e; color: white; border: none; padding: 12px 22px; border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        .whatsapp-container { width: 100%; text-align: center; }
+        .whatsapp-btn { background-color: #25D366; color: white; border: none; padding: 12px 20px; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 90%; max-width: 400px; }
+        .preview-img { max-width: 150px; border-radius: 10px; margin-top: 5px; display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
@@ -110,75 +28,156 @@
 
     <div class="chat-container" id="chatBox">
         <div class="message ai-message">
-            Barkanku da zuwa! Sannu abokina Bashir. Ni ne Gwani AI, fasahar da aka gina ta musamman don taimaka muku da amsa tambayoyi cikin yaren Hausa lafiya lau. Menene zamuyi yanzu?
+            Barkanku da zuwa! Sannu babban abokina Bashir. Ni ne Gwani AI. Yanzu zaka iya magana da ni da **Murya**, ko ka turo mini **Hoto** na gani na fassara maka cikin Hausa! Menene zamuyi yanzu?
         </div>
     </div>
 
     <div class="footer-controls">
+        <div style="padding-left: 10px;"><img id="imgPreview" class="preview-img" src="" alt="Preview"></div>
         <div class="input-container">
-            <input type="text" id="userInput" placeholder="Rubuta tambayarka anan...">
-            <button onclick="sendMessage()">Aika</button>
+            <button class="icon-btn" onclick="document.getElementById('fileInput').click()">📷</button>
+            <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="previewImage(event)">
+            
+            <button class="icon-btn" id="voiceBtn" onclick="startVoiceRecognition()">🎙️</button>
+            
+            <input type="text" id="userInput" placeholder="Rubuta ko kayi magana...">
+            <button class="send-btn" onclick="sendMessage()">Aika</button>
         </div>
         
         <div class="whatsapp-container">
-            <a href="https://wa.me" 
-               target="_blank" 
-               style="text-decoration: none; display: inline-block; width: 100%;">
-                <button class="whatsapp-btn" type="button">
-                    📢 Tura Wa Abokai A WhatsApp
-                </button>
+            <a href="https://wa.me" target="_blank" style="text-decoration: none; display: inline-block; width: 100%;">
+                <button class="whatsapp-btn" type="button">📢 Tura Wa Abokai A WhatsApp</button>
             </a>
         </div>
     </div>
 
-    <script>
-        async function sendMessage() {
-            let inputField = document.getElementById("userInput");
-            let chatBox = document.getElementById("chatBox");
-            let messageText = inputField.value.trim();
+<script>
+    import dotenv from "dotenv";
+dotenv.config();
 
-            if (messageText === "") return;
+const OPENROUTER_KEY = process.env.OPENROUTER_API_KEY;     }, ⚠️ SAKA KEY DINKA ANAN LAFIYA LAU
+    let base64Image = "";
+    function previewImage(event) {
+        let file = event.target.files[0];
+        if (!file) return;
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            base64Image = e.target.result; 
+            let imgElement = document.getElementById("imgPreview");
+            imgElement.src = e.target.result;
+            imgElement.style.display = "block";
+        }
+        reader.readAsDataURL(file);
+    }
 
-            let userDiv = document.createElement("div");
-            userDiv.className = "message user-message";
-            userDiv.innerText = messageText;
-            chatBox.appendChild(userDiv);
+    function startVoiceRecognition() {
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!window.SpeechRecognition) {
+            alert("Kash! Wayarka ba ta goyon bayan tsarin murya a Browser.");
+            return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = "ha-NG"; 
+        
+        let voiceBtn = document.getElementById("voiceBtn");
+        voiceBtn.innerText = "🛑";
+        voiceBtn.style.background = "#ffcccc";
 
-            inputField.value = ""; 
-            chatBox.scrollTop = chatBox.scrollHeight; 
+        recognition.start();
 
-            let loadingDiv = document.createElement("div");
-            loadingDiv.className = "message ai-message";
-            loadingDiv.innerText = "Gwani AI yana tunani... 🔄";
-            loadingDiv.id = "loading";
-            chatBox.appendChild(loadingDiv);
+        recognition.onresult = function(event) {
+            let speechToText = event.results[0].transcript;
+            document.getElementById("userInput").value = speechToText;
+            resetVoiceBtn();
+        }
+
+        recognition.onerror = function() { resetVoiceBtn(); }
+        recognition.onend = function() { resetVoiceBtn(); }
+    }
+
+    function resetVoiceBtn() {
+        let voiceBtn = document.getElementById("voiceBtn");
+        voiceBtn.innerText = "🎙️";
+        voiceBtn.style.background = "#f0f2f1";
+    }
+
+    async function sendMessage() {
+        let inputField = document.getElementById("userInput");
+        let chatBox = document.getElementById("chatBox");
+        let messageText = inputField.value.trim();
+
+        if (messageText === "" && base64Image === "") return;
+
+        let userDiv = document.createElement("div");
+        userDiv.className = "message user-message";
+        userDiv.innerText = messageText || "Hoto aka tura 📷";
+        chatBox.appendChild(userDiv);
+
+        inputField.value = ""; 
+        document.getElementById("imgPreview").style.display = "none";
+        chatBox.scrollTop = chatBox.scrollHeight; 
+
+        let loadingDiv = document.createElement("div");
+        loadingDiv.className = "message ai-message";
+        loadingDiv.innerText = "Gwani AI yana nazari... 🔄";
+        loadingDiv.id = "loading";
+        chatBox.appendChild(loadingDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        let promptContent = [];
+        
+        if (base64Image !== "") {
+            promptContent.push({ type: "image_url", image_url: { url: base64Image } });
+        }
+        
+        promptContent.push({ type: "text", text: "Kai ne Gwani AI. Abokin taimakon mutane cikin yaren Hausa. Ka amsa tambayoyi a gajarce, cikin sauki da Hausa mai dadi. Idan akwai hoto, ka duba hoton da kyau ka yi bayani ko ka fassara abin da ke ciki da Hausa. Tambaya: " + messageText });
+
+        let currentImage = base64Image; 
+        base64Image = ""; 
+
+        try {
+            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                method: "POST",
+                headers: {
+    "Authorization": `Bearer ${OPENROUTER_KEY}`,
+    "Content-Type": "application/json",
+    "HTTP-Referer": "https://your-app.com",
+    "X-Title": "Gwani AI"
+},
+    console.log(data);
+    throw new Error(data.error?.message || "OpenRouter Error");
+}
+
+let aiReply = data.choices[0].message.content;
+                },
+                body: JSON.stringify({
+                    model: "meta-llama/llama-3.2-11b-vision-instruct:free", 
+                    messages: [{ role: "user", content: promptContent }]
+                })
+            });
+
+            const data = await response.json();
+            
+            // 🛑 GYARA MAFI MUHIMMANCI: An saka lamba [0] a jikin choices don ya ciro rubutu lafiya lau
+            let aiReply = data["choices"][0]["message"]["content"];
+
+            document.getElementById("loading").remove();
+
+            let aiDiv = document.createElement("div");
+            aiDiv.className = "message ai-message";
+            aiDiv.innerText = aiReply;
+            chatBox.appendChild(aiDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            try {
-                // 🛑 GYARA MAFI MUHIMMANCI: An dawo da tsarin GET mai jona tambaya a URL wanda baya gazawa
-                let tsarinSako = "Kai ne Gwani AI. Abokin taimakon mutane cikin yaren Hausa. Ka amsa tambayoyi a gajarce, cikin sauki da Hausa mai dadi. Tambaya: " + messageText;
-                
-                const response = await fetch("https://pollinations.ai" + encodeURIComponent(tsarinSako));
-                let aiReply = await response.text();
-
-                document.getElementById("loading").remove();
-
-                let aiDiv = document.createElement("div");
-                aiDiv.className = "message ai-message";
-                aiDiv.innerText = aiReply;
-                chatBox.appendChild(aiDiv);
-                chatBox.scrollTop = chatBox.scrollHeight;
-
-            } catch (error) {
-                if(document.getElementById("loading")) {
-                    document.getElementById("loading").remove();
-                }
-                let errorDiv = document.createElement("div");
-                errorDiv.className = "message ai-message";
-                errorDiv.innerText = "Kash! An sami ɗan matsala wajen haɗawa da sabar. Maza sake jarraba aikawa.";
-                chatBox.appendChild(errorDiv);
-            }
+        } catch (error) {
+            if(document.getElementById("loading")) document.getElementById("loading").remove();
+            let errorDiv = document.createElement("div");
+            errorDiv.className = "message ai-message";
+            errorDiv.innerText = "Kash! Gwani AI ya kasa amsawa. Tabbatar ka saka asalin OpenRouter Key dinka da kyau ba tare da space ba.";
+            chatBox.appendChild(errorDiv);
+            console.error(error);
         }
-    </script>
+    }
+ </script>
 </body>
 </html>
