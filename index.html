@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang='ha'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Gwani AI</title></head><body><div id='chat'></div><input id='text'><button onclick='send()'>Aika</button><script>const WORKER='https://bashar-ai.bashirbelloaliyu0.workers.dev/';async function send(){const m=text.value;const r=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:m})});const d=await r.json();chat.innerHTML+='<p><b>Kai:</b>'+m+'</p><p><b>AI:</b>'+(d.choices?.[0]?.message?.content||JSON.stringify(d))+'</p>';text.value='';}</script></body></<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bashir AI</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>🤖 Bashir AI</h1>
+  <p>AI mai magana da Hausa</p>
+</header>
+
+<main id="chatBox" class="chat-box">
+  <div class="ai-message">
+    Sannu! Ni ne <strong>Bashir AI</strong>. Yaya zan taimaka maka?
+  </div>
+</main>
+
+<div class="input-area">
+  <input
+    type="text"
+    id="userInput"
+    placeholder="Rubuta saƙonka..."
+  >
+
+  <button id="sendBtn">
+    Aika
+  </button>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
