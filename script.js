@@ -99,7 +99,7 @@ const SpeechRecognition =
 if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
 
-    recognition.lang = "ha-NG";
+    recognition.lang = "en-US";
     recognition.interimResults = false;
 
     voiceBtn.onclick = () => {
