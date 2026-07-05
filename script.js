@@ -90,3 +90,36 @@ if(savedTheme){
     document.body.className = savedTheme;
     themeBtn.textContent = savedTheme==="dark" ? "🌙":"☀️";
 }
+const voiceBtn = document.getElementById("voiceBtn");
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "ha-NG";
+    recognition.interimResults = false;
+
+    voiceBtn.onclick = () => {
+        recognition.start();
+        voiceBtn.textContent = "🎙️...";
+    };
+
+    recognition.onresult = (event) => {
+        userInput.value = event.results[0][0].transcript;
+        voiceBtn.textContent = "🎤";
+    };
+
+    recognition.onerror = () => {
+        voiceBtn.textContent = "🎤";
+        alert("Ba a iya amfani da murya a wannan browser.");
+    };
+
+    recognition.onend = () => {
+        voiceBtn.textContent = "🎤";
+    };
+} else {
+    voiceBtn.style.display = "none";
+}
