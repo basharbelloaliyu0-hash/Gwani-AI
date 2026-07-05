@@ -18,6 +18,11 @@ function addMessage(text, type) {
     div.textContent = text;
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
+    localStorage.setItem("chat", chatBox.innerHTML);
+    const oldChat = localStorage.getItem("chat");
+if(oldChat){
+    chatBox.innerHTML = oldChat;
+}
 }
 
 async function sendMessage() {
