@@ -62,3 +62,26 @@ async function sendMessage() {
         console.error(error);
     }
 }
+const themeBtn = document.getElementById("themeBtn");
+
+document.body.classList.add("dark");
+
+themeBtn.onclick = () => {
+    if (document.body.classList.contains("dark")) {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+        themeBtn.textContent = "☀️";
+        localStorage.setItem("theme","light");
+    } else {
+        document.body.classList.remove("light");
+        document.body.classList.add("dark");
+        themeBtn.textContent = "🌙";
+        localStorage.setItem("theme","dark");
+    }
+};
+
+const savedTheme = localStorage.getItem("theme");
+if(savedTheme){
+    document.body.className = savedTheme;
+    themeBtn.textContent = savedTheme==="dark" ? "🌙":"☀️";
+}
